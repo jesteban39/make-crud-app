@@ -1,0 +1,25 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+import <~Model~> from '../../models/<~model~>.js';
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const delete<~Model~> = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const find<~Model~> = await <~Model~>.findByPk(parseInt(id));
+        if (!find<~Model~>) {
+            return res.status(400).json(
+                { error: `No se encontro registro para el id ${id}` }
+            );
+        }
+        const save<~Model~> = await find<~Model~>.update({ activo: false });
+        return res.status(200).json(save<~Model~>);
+    } catch (error) {
+        return res.status(500).json({ error: error.message || error });
+    }
+}
+
+/* ~~~~~~ Export ~~~~~~ */
+export default delete<~Model~>;

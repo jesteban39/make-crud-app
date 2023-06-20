@@ -1,0 +1,31 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+import Express from 'express';
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const route = Express.Router();
+
+/**
+ * @openapi
+ * tags:
+ *   name: <~ui_Models~>
+ *   description: 
+*/
+
+/**
+ * @swagger
+ * components:
+ *   parameters:
+ *     <~model~>Id:
+ *       in: path
+ *       name: id
+ *       schema:
+ *         type: integer
+ *       required: true
+ *       description: ID de <~ui_model~>.
+*/
+
+/* ~~~~~~ Export ~~~~~~ */
+export default route;

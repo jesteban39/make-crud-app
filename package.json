@@ -1,0 +1,12 @@
+{
+  "name": "meke-crud-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "algoritmo para generar aplicaciones básicas mediante el uso de plantillas ",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Esteban Quintero",
+  "license": "ISC"
+}

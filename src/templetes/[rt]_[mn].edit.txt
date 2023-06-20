@@ -1,0 +1,43 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+import Express from 'express';
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+import editController from '../../controllers/<~folder~>/edit.js';
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const route = Express.Router();
+
+/**
+ * @openapi
+ * /<~path~>/edit/{id}:
+ *   put:
+ *     tags: [<~ui_Models~>]
+ *     summary: 
+ *     description: Editar <~ui_model~>.
+ *     parameters:
+ *       - $ref: '#/components/parameters/<~model~>Id'
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/<~table~>'
+ *             example:
+ *               tipo: 'admin'
+ *               cantidad: 5
+ *     responses:
+ *       200:
+ *         description: Retorna <~ui_model~> editado en BD.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   $ref: '#/definitions/<~table~>'
+ */
+route.put('/:id', editController);
+
+/* ~~~~~~ Export ~~~~~~ */
+export default route;

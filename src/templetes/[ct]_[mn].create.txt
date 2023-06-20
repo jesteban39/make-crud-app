@@ -1,0 +1,18 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+import <~Model~> from '../../models/<~file~>';
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const create<~Model~> = async (req, res) => {
+    try {
+        const new<~Model~> = await <~Model~>.create({ ...req.body });
+        return res.status(200).json(new<~Model~>);
+    } catch (error) {
+        return res.status(500).json({ error: error.message || error });
+    }
+}
+
+/* ~~~~~~ Export ~~~~~~ */
+export default create<~Model~>;

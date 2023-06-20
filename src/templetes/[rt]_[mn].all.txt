@@ -1,0 +1,33 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+import Express from 'express';
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+import allController from '../../controllers/<~folder~>/all.js';
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const route = Express.Router();
+
+/**
+ * @openapi
+ * /<~path~>/all:
+ *   get:
+ *     tags: [<~ui_Models~>]
+ *     description: Optener todos los <~ui_models~>.
+ *     responses:
+ *       200:
+ *         description: Retorna todos los <~ui_models~> almacenados en BD.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/<~table~>'
+ */
+route.get('/', allController);
+
+/* ~~~~~~ Export ~~~~~~ */
+export default route;

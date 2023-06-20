@@ -1,0 +1,43 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+import Express from 'express';
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+import deleteController from '../../controllers/<~model~>/delete.js';
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const route = Express.Router();
+
+/**
+ * @openapi
+ * /<~path~>/delete/{id}:
+ *   delete:
+ *     tags: [<~ui_Models~>]
+ *     summary: 
+ *     description: Eliminar un <~ui_model~>.
+ *     parameters:
+ *       - $ref: '#/components/parameters/<~model~>Id'
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/<~ui_model~>s'
+ *             example:
+ *               tipo: 'admin'
+ *               cantidad: 5
+ *     responses:
+ *       200:
+ *         description: Retorna el  <~ui_model~> eliminado en BD.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   $ref: '#/definitions/<~ui_model~>s'
+ */
+route.delete('/:id', deleteController);
+
+/* ~~~~~~ Export ~~~~~~ */
+export default route;

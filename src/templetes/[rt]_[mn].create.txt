@@ -1,0 +1,41 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+import Express from 'express';
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+import createController from '../../controllers/<~folder~>/create.js';
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const route = Express.Router();
+
+/**
+ * @openapi
+ * /<~path~>/create:
+ *   post:
+ *     tags: [<~ui_Models~>]
+ *     summary: 
+ *     description: Crear un nuevo <~ui_model~>.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/<~table~>'
+ *             example:
+ *               tipo: 'admin'
+ *               cantidad: 5
+ *     responses:
+ *       200:
+ *         description: Retorna el nuevo <~ui_model~> creado en BD.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   $ref: '#/definitions/<~table~>'
+ */
+route.post('/', createController);
+
+/* ~~~~~~ Export ~~~~~~ */
+export default route;

@@ -1,0 +1,17 @@
+/* ~~~~~~ External module imports ~~~~~~ */
+import { sequelize } from '../database/db.js'
+import dataType from 'sequelize'
+
+/* ~~~~~~ Internal imports ~~~~~~ */
+
+/* ~~~~~~ Declarations ~~~~~~ */
+
+export const <~Model~> = sequelize.define('<~table~>', {
+
+/* ~~~~~~ Columns ~~~~~~ */
+    
+})
+
+
+/* ~~~~~~ Export ~~~~~~ */
+export default <~Model~>
