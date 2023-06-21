@@ -1,12 +1,12 @@
 /* ~~~~~~ External module imports ~~~~~~ */
-import Express from 'express';
+import Express from 'express'
 
 /* ~~~~~~ Internal imports ~~~~~~ */
-import createController from '../../controllers/<~folder~>/create.js';
+import createController from '../../controllers/<~folder~>/create.js'
 
 /* ~~~~~~ Declarations ~~~~~~ */
 
-export const route = Express.Router();
+export const route = Express.Router()
 
 /**
  * @openapi
@@ -35,7 +35,7 @@ export const route = Express.Router();
  *                 data:
  *                   $ref: '#/definitions/<~table~>'
  */
-route.post('/', createController);
+route.post('/', createController)
 
 /* ~~~~~~ Export ~~~~~~ */
-export default route;
+export default route

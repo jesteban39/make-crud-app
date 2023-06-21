@@ -1,12 +1,12 @@
 /* ~~~~~~ External module imports ~~~~~~ */
-import Express from 'express';
+import Express from 'express'
 
 /* ~~~~~~ Internal imports ~~~~~~ */
-import allController from '../../controllers/<~folder~>/all.js';
+import allController from '../../controllers/<~folder~>/all.js'
 
 /* ~~~~~~ Declarations ~~~~~~ */
 
-export const route = Express.Router();
+export const route = Express.Router()
 
 /**
  * @openapi
@@ -27,7 +27,7 @@ export const route = Express.Router();
  *                   items:
  *                     $ref: '#/components/schemas/<~table~>'
  */
-route.get('/', allController);
+route.get('/', allController)
 
 /* ~~~~~~ Export ~~~~~~ */
-export default route;
+export default route

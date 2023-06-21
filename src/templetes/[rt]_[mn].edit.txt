@@ -1,12 +1,12 @@
 /* ~~~~~~ External module imports ~~~~~~ */
-import Express from 'express';
+import Express from 'express'
 
 /* ~~~~~~ Internal imports ~~~~~~ */
-import editController from '../../controllers/<~folder~>/edit.js';
+import editController from '../../controllers/<~folder~>/edit.js'
 
 /* ~~~~~~ Declarations ~~~~~~ */
 
-export const route = Express.Router();
+export const route = Express.Router()
 
 /**
  * @openapi
@@ -37,7 +37,7 @@ export const route = Express.Router();
  *                 data:
  *                   $ref: '#/definitions/<~table~>'
  */
-route.put('/:id', editController);
+route.put('/:id', editController)
 
 /* ~~~~~~ Export ~~~~~~ */
-export default route;
+export default route

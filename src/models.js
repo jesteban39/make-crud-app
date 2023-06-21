@@ -1,5 +1,4 @@
 
-
 const capitalizer = (word) => {
     return [
         word.charAt(0).toUpperCase() + word.slice(1),
@@ -8,7 +7,7 @@ const capitalizer = (word) => {
 }
 
 const genereteNames = (modelName) => {
-    const [Name, name] = capitalizer(modelName);
+    const [Name, name] = capitalizer(modelName)
 
     return {
         Model: Name,
@@ -31,14 +30,14 @@ const genereteNames = (modelName) => {
     }
 }
 
-export const getListModels = () => Object.keys(models);
+export const getListModels = () => Object.keys(models)
 
 export const getAlias = (modelName) => {
-    return models[modelName].alias;
+    return models[modelName].alias
 }
 
 export const getColums = (modelName) => {
-    return models[modelName].columns;
+    return models[modelName].columns
 }
 
 export const models = {
@@ -211,8 +210,8 @@ export const models2 = {
             ui_models: 'sesiones de usuario'
         }
     }
-};
+}
 
-//console.log(genereteNames('aplicación'));
+//console.log(genereteNames('aplicación'))
 
-export default models;
+export default models

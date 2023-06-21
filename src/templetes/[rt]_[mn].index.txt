@@ -1,11 +1,11 @@
 /* ~~~~~~ External module imports ~~~~~~ */
-import Express from 'express';
+import Express from 'express'
 
 /* ~~~~~~ Internal imports ~~~~~~ */
 
 /* ~~~~~~ Declarations ~~~~~~ */
 
-export const route = Express.Router();
+export const route = Express.Router()
 
 /**
  * @openapi
@@ -28,4 +28,4 @@ export const route = Express.Router();
 */
 
 /* ~~~~~~ Export ~~~~~~ */
-export default route;
+export default route

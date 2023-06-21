@@ -1,12 +1,12 @@
 /* ~~~~~~ External module imports ~~~~~~ */
-import Express from 'express';
+import Express from 'express'
 
 /* ~~~~~~ Internal imports ~~~~~~ */
-import deleteController from '../../controllers/<~model~>/delete.js';
+import deleteController from '../../controllers/<~model~>/delete.js'
 
 /* ~~~~~~ Declarations ~~~~~~ */
 
-export const route = Express.Router();
+export const route = Express.Router()
 
 /**
  * @openapi
@@ -37,7 +37,7 @@ export const route = Express.Router();
  *                 data:
  *                   $ref: '#/definitions/<~ui_model~>s'
  */
-route.delete('/:id', deleteController);
+route.delete('/:id', deleteController)
 
 /* ~~~~~~ Export ~~~~~~ */
-export default route;
+export default route

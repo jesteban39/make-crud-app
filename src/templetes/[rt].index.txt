@@ -1,12 +1,12 @@
 /* ~~~~~~ External module imports ~~~~~~ */
-import Express from 'express';
+import Express from 'express'
 
 /* ~~~~~~ Internal imports ~~~~~~ */
 
 /* ~~~~~~ Declarations ~~~~~~ */
 
-const route = Express.Router();
+const route = Express.Router()
 
 /* ~~~~~~ Export ~~~~~~ */
-export default route;
+export default route
 
