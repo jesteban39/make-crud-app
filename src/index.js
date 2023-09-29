@@ -3,9 +3,9 @@ import path from 'path'
 
 import { getAlias, getListModels, getColums } from './models.js'
 
-const ROOT = path.join('C:/Users/EXNOjequinte/Desktop/Developer/Axity/crud-app')
+const ROOT = path.join('../crud-app')
 const TEMPLETES = path.join('./src/templetes/')
-const CONTROLLERS = ['All', 'Create', 'Edit', 'Delete']
+const CONTROLLERS = [] // ['All', 'Create', 'Edit', 'Delete']
 
 const capitalizer = (str) => {
     return [
@@ -91,7 +91,7 @@ const getReplacements = (modelName) => {
  * Genera un archivo nuevo a partir de una plantilla.
  * @param {string} templeteFile Nombre del archivo plantilla.
  * @param {string} modelName Nombre del modelo.
- * @returns la rura apsoluta del nuevo archivo generado.
+ * @returns la rura apsoluta del nuevo archivo generado o bull si el archivo ya existia.
  */
 const mekeFile = async (templeteFile, modelName) => {
     const replacements = getReplacements(modelName)
@@ -104,22 +104,17 @@ const mekeFile = async (templeteFile, modelName) => {
             templete
         )
         await saveFile(paths.newFile, newFile)
+        return (paths.newFile)
     }
-    return (paths.newFile)
+    return null
 }
 
-const mekeItem = (colum) => {
-    let item = `\n\t${colum.name}: {`
-    item += `\n\t\ttype: dataType.${colum.type},`
-    if(colum.allowNull === false) item += `\n\t\tallowNull: false,`
-    if(colum.unique === true) item += `\n\t\tunique: true,`
-    if(colum.autoIncrement === true) item += `\n\t\tautoIncrement: true,`
-    if(colum.primaryKey === true) item += `\n\t\tprimaryKey: true,`
-    if(colum.defaultValue ) item += `\n\t\tdefaultValue: ${
-        new RegExp('STRING|TEXT','i').exec(colum.type) ? `'${colum.defaultValue}'` : colum.defaultValue
-    },`
-    item += `\n\t},`
-    return item
+const mekeItemDb = (name, values) => {
+    const itemKeys = Object.keys(values)
+    const item = itemKeys.reduce((item, key) => {
+        return item + `\n\t\t\t${key}: ${values[key]},`
+    }, `\n\t\t${name}: {`)
+    return item + `\n\t\t},`
 }
 
 const getPayloadAddLine = (lineId, modelName) => {
@@ -132,11 +127,11 @@ const getPayloadAddLine = (lineId, modelName) => {
                 filePath: path.join(ROOT, 'routes/index.js'),
                 lines: [
                     {
-                        find: '/* ~~~~~~ Declarations ~~~~~~ */',
+                        find: '/*~Declaration~*/',
                         line: `import route${alias.Model} from './${alias.folder}/index.js'`
                     },
                     {
-                        find: '/* ~~~~~~ Export ~~~~~~ */',
+                        find: '/*~Import~*/',
                         line: `route.use('/${alias.path}', route${alias.Model})`
                     }
                 ]
@@ -147,34 +142,28 @@ const getPayloadAddLine = (lineId, modelName) => {
                 lines: CONTROLLERS.reduce((lines, ctrl) => {
                     const [Ctr, ctr] = capitalizer(ctrl)
                     lines.push({
-                        find: '/* ~~~~~~ Declarations ~~~~~~ */',
+                        find: '/*~Declaration~*/',
                         line: `import route${Ctr} from './${ctr}.js'`
                     })
                     lines.push({
-                        find: '/* ~~~~~~ Export ~~~~~~ */',
+                        find: '/*~Import~*/',
                         line: `route.use('/${ctr}', route${Ctr})`
                     })
                     return lines
                 }, []),
             }
-        case '-[md].[mn].txt':
+        case '[md].[mn].txt':
             const colums = getColums(modelName)
             return {
-                filePath: path.join(ROOT, `models/${alias.Model}.js`),
-                lines: [
-                    ...colums.map(colum => ({
-                        find: '/* ~~~~~~ Columns ~~~~~~ */',
-                        line: mekeItem(colum)
-                    })),
-                    {
-                        find: '/* ~~~~~~ Columns ~~~~~~ */',
-                        line: ''
-                    }
-                ]
+                filePath: path.join(ROOT, `models/${alias.file}`),
+                lines: [...colums.map(({ name, sequelize }) => ({
+                    find: '/*~Column~*/',
+                    line: mekeItemDb(name, sequelize)
+                }))]
             }
-        case '[md].[mn].txt':
+        case '-[md].[mn].txt':
             return {
-                filePath: path.join(ROOT, `models/${alias.Model}.js`),
+                filePath: path.join(ROOT, `models/${alias.file}`),
                 lines: [
                     {
                         find: '',
@@ -192,7 +181,7 @@ const addLines = async (lineId, modelName) => {
     const originalFile = await getFile(filePath)
     const newFile = lines.reduce((file, { find, line }) => {
         if (file.includes(line)) return file
-        return file.replaceAll(`\n${find}`, `${line}\n\n${find}`)
+        return file.replaceAll(`${find}`, `${line}\n${find}\n`)
     }, originalFile)
     await saveFile(filePath, newFile)
 }
@@ -210,14 +199,16 @@ const generateFiles = async () => {
         const modelName = modelNames[i]
 
         await Promise.all(templeteFils.map(async (templeteFileName) => {
-            return mekeFile(templeteFileName, modelName)
+            const file = await mekeFile(templeteFileName, modelName)
+            if (file) console.log(file)
         }))
 
-        await Promise.all(filNames.map(async (f) => {
-            await addLines(f, modelName)
+        await Promise.all(filNames.map(async (file) => {
+            await addLines(file, modelName)
         }))
 
     }
+
 }
 
 generateFiles()

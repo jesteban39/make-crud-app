@@ -6,27 +6,27 @@ const capitalizer = (word) => {
     ]
 }
 
-const genereteNames = (modelName) => {
-    const [Name, name] = capitalizer(modelName)
+const genereteAlias = (modelName) => {
+    const [Alias, alias] = capitalizer(modelName)
 
     return {
-        Model: Name,
-        model: name,
-        Models: Name + 's',
-        models: name + 's',
+        Model: Alias,
+        model: alias,
+        Models: Alias + 's',
+        models: alias + 's',
 
-        file: name + '.js',
-        folder: name,
-        path: name + 's',
-        api_path: name + 's',
-        label: Name,
-        table: name + 's',
+        file: alias + '.js',
+        folder: alias,
+        path: alias + 's',
+        api_path: alias + 's',
+        label: Alias,
+        table: alias + 's',
 
-        ui_Model: Name,
-        ui_model: name,
-        ui_Models: Name + 's',
-        ui_models: name + 's',
-        ui_path: name + 's',
+        ui_Model: Alias,
+        ui_model: alias,
+        ui_Models: Alias + 's',
+        ui_models: alias + 's',
+        ui_path: alias + 's',
     }
 }
 
@@ -61,23 +61,35 @@ export const models = {
         columns: [
             {
                 name: 'nombre',
-                type: 'STRING',
-                allowNull: false,
-                unique: true,
-                autoIncrement: true,
-                primaryKey: true,
-                defaultValue: 'Esteban',
-                example: ''
+                sequelize: {
+                    type: 'DataTypes.STRING(100)',
+                    allowNull: 'false',
+                    unique: 'true',
+                    autoIncrement: 'true',
+                    primaryKey: 'true',
+                    defaultValue: 'Esteban',
+                },
+                swagger: {
+                    type: 'string',
+                    example: '',
+                }
             },
             {
                 name: 'descripcion',
-                type: 'STRING',
-                allowNull: false,
-                unique: true,
-                autoIncrement: true,
-                defaultValue: true,
-                example: ''
-            },
+                sequelize: {
+                    type: 'DataTypes.STRING',
+                    allowNull: false,
+                    unique: true,
+                    autoIncrement: true,
+                    defaultValue: true,
+                },
+                swagger: {
+                    type: 'string',
+                    example: '',
+                }
+            }
+        ],
+        masCulums: [
             {
                 name: 'cantidad',
                 type: 'NUMBER',

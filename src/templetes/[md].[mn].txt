@@ -1,27 +1,9 @@
-/* ~~~~~~ External module imports ~~~~~~ */
-import { sequelize } from '../database/db.js'
-import dataType from 'sequelize'
 
-/* ~~~~~~ Internal imports ~~~~~~ */
+export const define<~Model~> = (sequelize, DataTypes) => {
+	
+    return sequelize.define('<~table~>', {
+/*~Column~*/
+	})
+}
 
-/* ~~~~~~ Declarations ~~~~~~ */
-
-export const <~Model~> = sequelize.define('<~table~>', {
-
-/* ~~~~~~ Columns ~~~~~~ */
-
-[~
-	<~name~>: {
-		type: dataType.<~type~>,
-		allowNull: <~allowNull~>,
-		unique: <~unique~>,
-		autoIncrement: <~autoIncrement~>,
-		defaultValue: <~defaultValue~>,
-	},
-~]
-
-})
-
-
-/* ~~~~~~ Export ~~~~~~ */
-export default <~Model~>
+export default define<~Model~>
