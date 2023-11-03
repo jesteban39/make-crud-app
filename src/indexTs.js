@@ -129,7 +129,7 @@ const getPayloadAddLine = (lineId, modelName) => {
           },
           {
             find: '<~Declaration~>',
-            line: `router.use('/${alias.path}', ${alias.model}Routes)`
+            line: `router.use('/${alias.Model}', ${alias.model}Routes)`
           }
         ]
       }
@@ -143,7 +143,7 @@ const getPayloadAddLine = (lineId, modelName) => {
           },
           {
             find: '<~Declaration~>',
-            line: `  sequelize.define('${alias.Model}', ${alias.model}, {tableName: '${alias.ui_model}'})`
+            line: `  sequelize.define('${alias.Model}', ${alias.model}, {tableName: '${alias.table}'})`
           }
         ]
       }
