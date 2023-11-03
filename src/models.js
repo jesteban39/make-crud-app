@@ -1,229 +1,200 @@
+import fs from 'fs'
 
 const capitalizer = (word) => {
-    return [
-        word.charAt(0).toUpperCase() + word.slice(1),
-        word.charAt(0).toLowerCase() + word.slice(1)
-    ]
+  return [
+    word.charAt(0).toUpperCase() + word.slice(1),
+    word.charAt(0).toLowerCase() + word.slice(1)
+  ]
 }
 
-const genereteAlias = (modelName) => {
-    const [Alias, alias] = capitalizer(modelName)
+const genereteAlias = (modelName, ui_ModelName) => {
+  const [Alias, alias] = capitalizer(modelName)
+  const [ui_Alias, ui_alias] = capitalizer(ui_ModelName)
 
-    return {
-        Model: Alias,
-        model: alias,
-        Models: Alias + 's',
-        models: alias + 's',
+  return {
+    Model: Alias,
+    model: alias,
+    Models: Alias + 's',
+    models: alias + 's',
 
-        file: alias + '.js',
-        folder: alias,
-        path: alias + 's',
-        api_path: alias + 's',
-        label: Alias,
-        table: alias + 's',
+    file: alias + '.ts',
+    folder: alias,
+    path: alias + 's',
+    api_path: alias + 's',
+    label: Alias,
+    table: ui_alias,
 
-        ui_Model: Alias,
-        ui_model: alias,
-        ui_Models: Alias + 's',
-        ui_models: alias + 's',
-        ui_path: alias + 's',
-    }
+    ui_Model: ui_Alias,
+    ui_model: ui_alias,
+    ui_path: ui_alias,
+    ui_Models: ui_Alias + 's',
+    ui_models: ui_alias + 's',
+    ui_paths: ui_alias + 's'
+  }
 }
 
 export const getListModels = () => Object.keys(models)
 
 export const getAlias = (modelName) => {
-    return models[modelName].alias
+  return models[modelName].alias
 }
 
 export const getColums = (modelName) => {
-    return models[modelName].columns
+  return [] // models[modelName].columns
 }
 
 export const models = {
-
-    app: {
-        alias: {
-            Model: 'App',
-            model: 'app',
-            Models: 'Apps',
-            models: 'apps',
-            file: 'app.js',
-            folder: 'app',
-            path: 'apps',
-            label: 'App',
-            table: 'aplicaciones',
-            ui_Model: 'Aplicación',
-            ui_model: 'aplicación',
-            ui_Models: 'Aplicaciónes',
-            ui_models: 'aplicaciónes'
-        },
-        columns: [
-            {
-                name: 'nombre',
-                sequelize: {
-                    type: 'DataTypes.STRING(100)',
-                    allowNull: 'false',
-                    unique: 'true',
-                    autoIncrement: 'true',
-                    primaryKey: 'true',
-                    defaultValue: 'Esteban',
-                },
-                swagger: {
-                    type: 'string',
-                    example: '',
-                }
-            },
-            {
-                name: 'descripcion',
-                sequelize: {
-                    type: 'DataTypes.STRING',
-                    allowNull: false,
-                    unique: true,
-                    autoIncrement: true,
-                    defaultValue: true,
-                },
-                swagger: {
-                    type: 'string',
-                    example: '',
-                }
-            }
-        ],
-        masCulums: [
-            {
-                name: 'cantidad',
-                type: 'NUMBER',
-                allowNull: false,
-                unique: true,
-                autoIncrement: true,
-                defaultValue: 1,
-                example: ''
-            },
-            {
-                name: 'enlace',
-                type: 'STRING',
-                allowNull: false,
-                unique: true,
-                autoIncrement: true,
-                defaultValue: 'https://ww.eq.com',
-                example: ''
-            },
-            {
-                name: 'estado',
-                type: 'STRING',
-                allowNull: false,
-                unique: true,
-                autoIncrement: true,
-                defaultValue: 'activo',
-                example: ''
-            },
-            {
-                name: 'activo',
-                type: 'BOOLEAN',
-                allowNull: false,
-                unique: true,
-                autoIncrement: true,
-                defaultValue: true,
-                example: ''
-            }
-        ]
-
+  contact: {
+    alias: {
+      Model: 'Contact',
+      model: 'contact',
+      Models: 'Contacts',
+      models: 'contacts',
+      file: 'contact.ts',
+      folder: 'contact',
+      path: 'contacts',
+      api_path: 'contacts',
+      label: 'Contact',
+      table: 'contacto',
+      ui_Model: 'Contacto',
+      ui_model: 'contacto',
+      ui_path: 'contacto',
+      ui_Models: 'Contactos',
+      ui_models: 'contactos',
+      ui_paths: 'contactos'
     }
+  },
+  flow: {
+    alias: {
+      Model: 'Flow',
+      model: 'flow',
+      Models: 'Flows',
+      models: 'flows',
+      file: 'flow.ts',
+      folder: 'flow',
+      path: 'flows',
+      api_path: 'flows',
+      label: 'Flow',
+      table: 'flujo',
+      ui_Model: 'Flujo',
+      ui_model: 'flujo',
+      ui_path: 'flujo',
+      ui_Models: 'Flujos',
+      ui_models: 'flujos',
+      ui_paths: 'flujos'
+    }
+  },
+  process: {
+    alias: {
+      Model: 'Process',
+      model: 'process',
+      Models: 'Processes',
+      models: 'processes',
+      file: 'process.ts',
+      folder: 'process',
+      path: 'processes',
+      api_path: 'processes',
+      label: 'Process',
+      table: 'proceso',
+      ui_Model: 'Proceso',
+      ui_model: 'proceso',
+      ui_path: 'proceso',
+      ui_Models: 'Procesos',
+      ui_models: 'procesos',
+      ui_paths: 'procesos'
+    }
+  },
+  service: {
+    alias: {
+      Model: 'Service',
+      model: 'service',
+      Models: 'Services',
+      models: 'services',
+      file: 'service.ts',
+      folder: 'service',
+      path: 'services',
+      api_path: 'services',
+      label: 'Service',
+      table: 'servicio',
+      ui_Model: 'Servicio',
+      ui_model: 'servicio',
+      ui_path: 'servicio',
+      ui_Models: 'Servicios',
+      ui_models: 'servicios',
+      ui_paths: 'servicios'
+    }
+  },
+  company: {
+    alias: {
+      Model: 'Company',
+      model: 'company',
+      Models: 'Companies',
+      models: 'companies',
+      file: 'company.ts',
+      folder: 'company',
+      path: 'companies',
+      api_path: 'companies',
+      label: 'Company',
+      table: 'sociedad',
+      ui_Model: 'Sociedad',
+      ui_model: 'sociedad',
+      ui_path: 'sociedad',
+      ui_Models: 'Sociedades',
+      ui_models: 'sociedades',
+      ui_paths: 'sociedades'
+    }
+  },
+  enterprise: {
+    alias: {
+      Model: 'Enterprise',
+      model: 'enterprise',
+      Models: 'Enterprises',
+      models: 'enterprises',
+      file: 'enterprise.ts',
+      folder: 'enterprise',
+      path: 'enterprises',
+      api_path: 'enterprises',
+      label: 'Enterprise',
+      table: 'negocio',
+      ui_Model: 'Negocio',
+      ui_model: 'negocio',
+      ui_path: 'negocio',
+      ui_Models: 'Negocios',
+      ui_models: 'negocios',
+      ui_paths: 'negocios'
+    }
+  },
+  user: {
+    alias: {
+      Model: 'User',
+      model: 'user',
+      Models: 'Users',
+      models: 'users',
+      file: 'user.ts',
+      folder: 'user',
+      path: 'users',
+      api_path: 'users',
+      label: 'User',
+      table: 'usuario',
+      ui_Model: 'Usuario',
+      ui_model: 'usuario',
+      ui_path: 'usuario',
+      ui_Models: 'Usuarios',
+      ui_models: 'usuarios',
+      ui_paths: 'usuarios'
+    }
+  }
 }
 
-export const models2 = {
+const listModels = [['user', 'usuario']]
 
-    communication: {
-        alias: {
-            Model: 'Communication',
-            model: 'communication',
-            Models: 'Communications',
-            models: 'communications',
-            file: 'communication.js',
-            folder: 'communication',
-            path: 'communications',
-            label: 'Communication',
-            table: 'comunicados',
-            ui_Model: 'Comunicado',
-            ui_model: 'comunicado',
-            ui_Models: 'Comunicados',
-            ui_models: 'comunicados'
-        }
-    },
+const fileModels = listModels.reduce((acum, [model, table]) => {
+  return `${acum}
+  ${model}: {
+    alias: ${JSON.stringify(genereteAlias(model, table))}
+  },`
+}, '')
 
-    service: {
-        alias: {
-            Model: 'Service',
-            model: 'service',
-            Models: 'Services',
-            models: 'services',
-            file: 'service.js',
-            folder: 'service',
-            path: 'services',
-            label: 'Service',
-            table: 'servicios',
-            ui_Model: 'Servicio',
-            ui_model: 'servicio',
-            ui_Models: 'Servicios',
-            ui_models: 'servicios'
-        }
-    },
-
-    incident: {
-        alias: {
-            Model: 'Incident',
-            model: 'incident',
-            Models: 'Incidents',
-            models: 'incidents',
-            file: 'incident.js',
-            folder: 'incident',
-            path: 'incidents',
-            label: 'Incident',
-            table: 'incidentes',
-            ui_Model: 'Incidente',
-            ui_model: 'incidente',
-            ui_Models: 'Incidentes',
-            ui_models: 'incidentes'
-        }
-    },
-
-    user: {
-        alias: {
-            Model: 'User',
-            model: 'user',
-            Models: 'Users',
-            models: 'users',
-            file: 'user.js',
-            folder: 'user',
-            path: 'users',
-            label: 'User',
-            table: 'usuarios',
-            ui_Model: 'Usuario',
-            ui_model: 'usuario',
-            ui_Models: 'Usuarios',
-            ui_models: 'usuarios'
-        }
-    },
-
-    userSession: {
-        alias: {
-            Model: 'UserSession',
-            model: 'userSession',
-            Models: 'UserSessions',
-            models: 'userSessions',
-            file: 'userSession.js',
-            folder: 'userSession',
-            path: 'userSessions',
-            label: 'UserSession',
-            table: 'sesionesUsuarios',
-            ui_Model: 'Sesión de usuario',
-            ui_model: 'sesión de usuario',
-            ui_Models: 'Sesiones de usuario',
-            ui_models: 'sesiones de usuario'
-        }
-    }
-}
-
-//console.log(genereteNames('aplicación'))
+fs.writeFileSync('./newModels.js', `export const models = {${fileModels}}`, 'utf8')
 
 export default models

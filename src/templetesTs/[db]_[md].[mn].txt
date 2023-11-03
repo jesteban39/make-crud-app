@@ -1,0 +1,17 @@
+import {DataTypes} from 'sequelize'
+
+export default {
+  id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    unique: true,
+    primaryKey: true,
+    comment: 'identificador universal unico para la tabal <~table~>'
+  },
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: 'Nombre de <~ui_model~>'
+  }
+}
+
