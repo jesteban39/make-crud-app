@@ -4,6 +4,7 @@ import path from 'path'
 import {getAlias, getListModels, getColums} from './models.js'
 
 const ROOT = path.join('../servicios-ti-api/src')
+//const ROOT = path.join('../crud-app/src')
 const TEMPLETES = path.join('./src/templetesTs/')
 const CONTROLLERS = [] // ['All', 'Create', 'Edit', 'Delete']
 
@@ -88,7 +89,7 @@ const getReplacements = (modelName) => {
  * Genera un archivo nuevo a partir de una plantilla.
  * @param {string} templeteFile Nombre del archivo plantilla.
  * @param {string} modelName Nombre del modelo.
- * @returns la rura apsoluta del nuevo archivo generado o bull si el archivo ya existia.
+ * @returns la rura apsoluta del nuevo archivo generado o null si el archivo ya existe.
  */
 const mekeFile = async (templeteFile, modelName) => {
   const replacements = getReplacements(modelName)

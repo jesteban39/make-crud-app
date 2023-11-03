@@ -11,7 +11,12 @@ export default {
   nombre: {
     type: DataTypes.STRING,
     allowNull: false,
-    comment: 'Nombre de <~ui_model~>'
+    comment: 'nombre de <~ui_model~>'
+  },
+  descripcion: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: 'descripcion de <~ui_model~>'
   }
 }
 
