@@ -3,8 +3,9 @@ import path from 'path'
 
 import {getAlias, getListModels, getColums} from './models.js'
 
-const ROOT = path.join('../servicios-ti-api/src')
+//const ROOT = path.join('../lambda-typescript-express-sequelize-jest/src')
 //const ROOT = path.join('../crud-app/src')
+const ROOT = path.join('../api-servicios-ti/src/')
 const TEMPLETES = path.join('./src/templetesTs/')
 const CONTROLLERS = [] // ['All', 'Create', 'Edit', 'Delete']
 

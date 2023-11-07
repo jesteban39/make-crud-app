@@ -1,38 +1,5 @@
 import fs from 'fs'
 
-const capitalizer = (word) => {
-  return [
-    word.charAt(0).toUpperCase() + word.slice(1),
-    word.charAt(0).toLowerCase() + word.slice(1)
-  ]
-}
-
-const genereteAlias = (modelName, ui_ModelName) => {
-  const [Alias, alias] = capitalizer(modelName)
-  const [ui_Alias, ui_alias] = capitalizer(ui_ModelName)
-
-  return {
-    Model: Alias,
-    model: alias,
-    Models: Alias + 's',
-    models: alias + 's',
-
-    file: alias + '.ts',
-    folder: alias,
-    path: alias + 's',
-    api_path: alias + 's',
-    label: Alias,
-    table: ui_alias,
-
-    ui_Model: ui_Alias,
-    ui_model: ui_alias,
-    ui_path: ui_alias,
-    ui_Models: ui_Alias + 's',
-    ui_models: ui_alias + 's',
-    ui_paths: ui_alias + 's'
-  }
-}
-
 export const getListModels = () => Object.keys(models)
 
 export const getAlias = (modelName) => {
@@ -41,6 +8,49 @@ export const getAlias = (modelName) => {
 
 export const getColums = (modelName) => {
   return [] // models[modelName].columns
+}
+
+export const models_lasm = {
+  user: {
+    alias: {
+      Model: 'User',
+      model: 'user',
+      Models: 'Users',
+      models: 'users',
+      file: 'user.ts',
+      folder: 'user',
+      path: 'users',
+      api_path: 'users',
+      label: 'User',
+      table: 'usuario',
+      ui_Model: 'Usuario',
+      ui_model: 'usuario',
+      ui_path: 'usuario',
+      ui_Models: 'Usuarios',
+      ui_models: 'usuarios',
+      ui_paths: 'usuarios'
+    }
+  },
+  supplier: {
+    alias: {
+      Model: 'Supplier',
+      model: 'supplier',
+      Models: 'Suppliers',
+      models: 'suppliers',
+      file: 'supplier.ts',
+      folder: 'supplier',
+      path: 'suppliers',
+      api_path: 'suppliers',
+      label: 'Supplier',
+      table: 'proveedor',
+      ui_Model: 'Proveedor',
+      ui_model: 'proveedor',
+      ui_path: 'proveedor',
+      ui_Models: 'Proveedores',
+      ui_models: 'proveedores',
+      ui_paths: 'proveedores'
+    }
+  }
 }
 
 export const models = {
@@ -266,12 +276,40 @@ export const models = {
   }
 }
 
-const listModels = [
-  ['backup', 'backup'],
-  ['vpn', 'vpn'],
-  ['navigation', 'navegación'],
-  ['storage', 'almacenamiento']
-]
+const capitalizer = (word) => {
+  return [
+    word.charAt(0).toUpperCase() + word.slice(1),
+    word.charAt(0).toLowerCase() + word.slice(1)
+  ]
+}
+
+const genereteAlias = (modelName, ui_ModelName) => {
+  const [Alias, alias] = capitalizer(modelName)
+  const [ui_Alias, ui_alias] = capitalizer(ui_ModelName)
+
+  return {
+    Model: Alias,
+    model: alias,
+    Models: Alias + 's',
+    models: alias + 's',
+
+    file: alias + '.ts',
+    folder: alias,
+    path: alias + 's',
+    api_path: alias + 's',
+    label: Alias,
+    table: ui_alias,
+
+    ui_Model: ui_Alias,
+    ui_model: ui_alias,
+    ui_path: ui_alias,
+    ui_Models: ui_Alias + 's',
+    ui_models: ui_alias + 's',
+    ui_paths: ui_alias + 's'
+  }
+}
+
+const listModels = [['supplier', 'proveedor']]
 
 const fileModels = listModels.reduce((acum, [model, table]) => {
   return `${acum}

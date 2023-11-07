@@ -2,45 +2,46 @@ import {Router} from 'express'
 import type {Request, Response} from 'express'
 import {PkNotMache} from '@declarations/errors'
 import {getModels} from '@db'
+import statusCodes from '@config/statusCodes'
 
 export const router = Router()
 
 router.get('/', async (_req: Request, res: Response) => {
   const {<~Model~>} = getModels()
   const <~models~> = await <~Model~>.findAll()
-  return res.status(200).json(<~models~>)
+  return res.status(statusCodes.OK).json(<~models~>)
 })
 
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:uuid', async (req: Request, res: Response) => {
   const {<~Model~>} = getModels()
-  const {id} = req.params
-  const <~model~> = await <~Model~>.findByPk(id)
-  if (!<~model~>) throw new PkNotMache(id)
-  return res.status(200).json(<~model~>)
+  const {uuid} = req.params
+  const <~model~> = await <~Model~>.findByPk(uuid)
+  if (!<~model~>) throw new PkNotMache(uuid)
+  return res.status(statusCodes.OK).json(<~model~>)
 })
 
 router.post('/', async (req: Request, res: Response) => {
   const {<~Model~>} = getModels()
   const <~model~> = await <~Model~>.create(req.body)
-  return res.status(200).json(<~model~>)
+  return res.status(statusCodes.OK).json(<~model~>)
 })
 
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:uuid', async (req: Request, res: Response) => {
   const {<~Model~>} = getModels()
-  const {id} = req.params
-  const <~model~> = await <~Model~>.findByPk(id)
-  if (!<~model~>) throw new PkNotMache(id)
+  const {uuid} = req.params
+  const <~model~> = await <~Model~>.findByPk(uuid)
+  if (!<~model~>) throw new PkNotMache(uuid)
   const new<~Model~> = await <~model~>.update({...req.body})
-  return res.status(200).json(new<~Model~>)
+  return res.status(statusCodes.OK).json(new<~Model~>)
 })
 
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:uuid', async (req: Request, res: Response) => {
   const {<~Model~>} = getModels()
-  const {id} = req.params
-  const <~model~> = await <~Model~>.findByPk(parseInt(id))
-  if (!<~model~>) throw new PkNotMache(id)
+  const {uuid} = req.params
+  const <~model~> = await <~Model~>.findByPk(parseInt(uuid))
+  if (!<~model~>) throw new PkNotMache(uuid)
   const new<~Model~> = await <~model~>.destroy()
-  return res.status(200).json(new<~Model~>)
+  return res.status(statusCodes.OK).json(new<~Model~>)
 })
 
 export default router
