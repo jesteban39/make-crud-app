@@ -9,5 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Esteban Quintero",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "change-case": "^5.4.4"
+  }
 }

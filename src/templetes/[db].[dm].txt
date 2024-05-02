@@ -1,0 +1,6 @@
+import type {Sequelize} from 'sequelize'
+<~Import~>
+
+export const defineModels = (sequelize: Sequelize) => {
+<~Declaration~>
+}
